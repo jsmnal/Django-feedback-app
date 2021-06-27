@@ -9,10 +9,16 @@ class Message(models.Model):
     rating = models.IntegerField('rating')
     feedback = models.CharField('feedback', max_length=300)
 
+    def __str__(self):
+        return self.title
+
 
 class Teacher(models.Model):
     first_name = models.CharField('first_name', max_length=100)
     last_name = models.CharField('last_name', max_length=100)
+
+    def __str__(self):
+        return f"{self.first_name}/{self.last_name}"
 
 class User(AbstractUser):
     pass
