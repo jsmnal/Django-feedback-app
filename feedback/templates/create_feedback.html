@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="container" style="width: 20rem;">
+        <div class="row justify-content-center">
+            <h1>Give feedback</h1>
+            <form action="{%url "create_feedback" %}" method="post">
+                {% csrf_token %}
+                {{form.as_p}}
+                <button type="submit" class="btn btn-dark" style="margin:10px">Send</button>
+            </form>
+        </div>
+    </div>
+{%endblock%}

@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{%block content%}
+    <div class="container" style="width: 20rem;">
+        <div class="row justify-content-center">
+            {%if user.is_authenticated%}
+            <h2> Welcome {{user.username}}!</h2>
+            <a href="{%url 'sign_out'%}" class="btn btn-dark btn-lg" role="button"> Sign out </a>
+            {%else%}
+            <a href="{%url 'sign_in' %}" class="btn btn-dark btn-lg" role="button" style="margin:10px">Sign in</a>
+            {%endif%}
+        </div>
+        <p> This is a fictional programming practice project web app. </p>
+    </div>
+{%endblock%}
