@@ -1,11 +1,18 @@
 {% extends 'base.html' %}
 {% block content %}
+    <a href="{%url 'feedback'%}" class="btn btn-secondary" role="button" style="margin:10px"> Back to feedback page </a>
     <div class="container" style="width: 20rem;">
         <div class="row justify-content-center">
             <h1>Delete feedback</h1>
             <form action="{%url "delete_feedback" message.pk %}" method="post">
                 {% csrf_token %}
                 {{form.as_p}}
+                <p> Are you sure you want to delete this feedback? </p>
+                <p> Title: {{message.title}} <br>
+                Teacher: {{message.teacher}} <br>
+                Rating: {{message.rating}} <br>
+                Feedback: {{message.feedback}} <br>
+                </p>
                 <button type="submit" class="btn btn-danger" style="margin:10px">Delete</button>
             </form>
         </div>

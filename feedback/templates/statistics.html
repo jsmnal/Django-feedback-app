@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+    {%block content%}
+        <div class="container" style="width:50%;">
+            <div class="row justify-content-center">
+                <h2> Statistics </h2>
+                <canvas id="barChart"></canvas>
+            </div>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@3.4.0/dist/chart.min.js"></script>
+        <script>
+            let ctx = document.getElementById("barChart").getContext("2d");
+            let barChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: {{ labels|safe }},
+                    datasets: [{
+                        data: {{ data|safe }},
+                        backgroundColor: [ '#b4d5e0'],
+                        label:"Average course ratings/teacher",
+
+                    }],
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                text: 'Average rate',
+                                display: true,
+                                font: {
+                                    size: 20,
+                                }
+                            }
+                        },
+                        x: {
+                            title: {
+                                text: 'Teachers by last names',
+                                display: true,
+                                font: {
+                                    size: 20,
+                                }
+                            }
+                        },
+                    }
+                }
+            });
+        </script>
+    {%endblock%}

@@ -1,11 +1,17 @@
 {% extends 'base.html' %}
 {% block content %}
+    <a href="{%url 'teachers'%}" class="btn btn-secondary" role="button" style="margin:10px"> Back to teacher page </a>
     <div class="container" style="width: 20rem;">
         <div class="row justify-content-center">
             <h1>Delete teacher information</h1>
             <form action="{%url "delete_teacher" teacher.pk %}" method="post">
                 {% csrf_token %}
                 {{form.as_p}}
+                <p> Are you sure you want to delete this teacher info? </p>
+                <p>
+                    First name: {{teacher.first_name}} <br>
+                    Last name: {{teacher.last_name}}
+                </p>
                 <button type="submit" class="btn btn-danger" style="margin:10px">Delete</button>
             </form>
         </div>
