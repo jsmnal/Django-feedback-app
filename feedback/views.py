@@ -16,10 +16,10 @@ def index(request):
 def statistics(request):
     labels = []
     data = []
-    queryset = models.Message.objects.values("teacher__last_name").annotate(teacher_rating=Avg("rating")).order_by("teacher")
+    queryset = models.Message.objects.values("course__title").annotate(course_rating=Avg("rating")).order_by("course")
     for message in queryset:
-        labels.append(message["teacher__last_name"])
-        data.append(message["teacher_rating"])
+        labels.append(message["course__title"])
+        data.append(message["course_rating"])
     return render(request, "statistics.html", {"labels":labels, "data":data})
 
 @login_required
@@ -33,6 +33,18 @@ def teacher(request):
     teacher_list = models.Teacher.objects.order_by("last_name")
     context = {"teacher_list":teacher_list}
     return render(request, "teachers.html", context)
+
+@login_required
+def course(request):
+    course_list = models.Course.objects.order_by("teacher")
+    context = {"course_list": course_list }
+    return render(request, "courses.html", context)
+
+@login_required
+def bug(request):
+    bug_list = models.Bug.objects.order_by("title")
+    context = {"bug_list": bug_list }
+    return render(request, "bugs.html", context)
 
 
 def sign_in(request):
@@ -90,3 +102,39 @@ class UpdateTeacherForm(LoginRequiredMixin,UpdateView):
     form_class = forms.TeacherForm
     template_name = "update_teacher.html"
     success_url = reverse_lazy("teachers")
+
+class CreateCourseForm(LoginRequiredMixin,CreateView):
+    model = models.Course
+    form_class = forms.CourseForm
+    template_name = "create_course.html"
+    success_url = reverse_lazy("courses")
+
+class DeleteCourseForm(LoginRequiredMixin,DeleteView):
+    model = models.Course
+    form_class = forms.CourseForm
+    template_name = "delete_course.html"
+    success_url = reverse_lazy("courses")
+
+class UpdateCourseForm(LoginRequiredMixin,UpdateView):
+    model = models.Course
+    form_class = forms.CourseForm
+    template_name = "update_course.html"
+    success_url = reverse_lazy("courses")
+
+class CreateBugForm(LoginRequiredMixin,CreateView):
+    model = models.Bug
+    form_class = forms.BugForm
+    template_name = "create_bug.html"
+    success_url = reverse_lazy("bugs")
+
+class DeleteBugForm(LoginRequiredMixin,DeleteView):
+    model = models.Bug
+    form_class = forms.BugForm
+    template_name = "delete_bug.html"
+    success_url = reverse_lazy("bugs")
+
+class UpdateBugForm(LoginRequiredMixin,UpdateView):
+    model = models.Bug
+    form_class = forms.BugForm
+    template_name = "update_bug.html"
+    success_url = reverse_lazy("bugs")
