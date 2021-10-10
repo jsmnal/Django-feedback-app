@@ -1,27 +1,32 @@
 {% extends 'base.html' %}
 {%block content%}
-    <div class="container" style="width: 20rem;">
-        <div class="row justify-content-center">
-            <a href="{%url 'create_feedback'%}" class="btn btn-dark btn-lg" role="button" style="margin:20px"> Create new feedback </a>
-        </div>
-        <h2> Previous feedback </h2>
-    </div>
-    {% for message in feedback_list %}
     <div class="container">
-        <div class="row justify-content-center">
-            <div class="card" style="width: 18rem;">
-                <div class="card-body">
-                    <h5 class="card-title">Course: {{message.title}} </h5>
-                    <p class="card-text">
-                        Teacher: {{message.teacher}} <br>
-                        Rating: {{message.rating}} <br>
-                        Feedback: {{message.feedback}}
-                    </p>
-                    <a href="{%url 'update_feedback' message.pk%}" class="btn btn-secondary" role="button" style="margin:5px"> Update feedback </a>
-                    <a href="{%url 'delete_feedback' message.pk%}" class="btn btn-danger" role="button" style="margin:5px"> Delete feedback </a>
-                </div>
+        <div class="row justify-content-md-center">
+            <div class="col col-lg-2">
+                <h2> Feedback </h2>
+            </div>
+        </div>
+        <div class="row justify-content-md-center">
+            <div class="col col-lg-3">
+                <a href="{%url 'create_feedback'%}" class="btn btn-dark btn-lg" role="button" style="margin:20px"> Create new feedback </a>
             </div>
         </div>
     </div>
-    {%endfor%}
+    <div class="row">
+        {% for message in feedback_list %}
+            <div class="col-sm-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">{{message.course}} </h5>
+                        <p class="card-text">
+                            Rating: {{message.rating}} <br>
+                            Message: {{message.feedback}}
+                        </p>
+                        <a href="{%url 'update_feedback' message.pk %}" class="btn btn-secondary" role="button" style="margin:5px"> Update feedback </a>
+                        <a href="{%url 'delete_feedback' message.pk %}" class="btn btn-danger" role="button" style="margin:5px"> Delete feedback </a>
+                    </div>
+                </div>
+            </div>
+        {%endfor%}
+    </div>
 {%endblock%}

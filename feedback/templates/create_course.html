@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block content %}
+    <a href="{%url 'courses'%}" class="btn btn-secondary" role="button" style="margin:10px"> Back to feedback page </a>
+    <div class="container" style="width: 20rem;">
+        <div class="row justify-content-center">
+            <h1>Create course</h1>
+            <form action="{%url "create_course" %}" method="post">
+                {% csrf_token %}
+                {{form.as_p}}
+                <button type="submit" class="btn btn-dark" style="margin:10px">Send</button>
+            </form>
+        </div>
+    </div>
+{%endblock%}

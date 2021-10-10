@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{%block content%}
+    <div class="container">
+        <div class="row justify-content-md-center">
+            <div class="col col-lg-2">
+                <h2> Courses </h2>
+            </div>
+        </div>
+        <div class="row justify-content-md-center">
+            <div class="col col-lg-3">
+                <a href="{%url 'create_course'%}" class="btn btn-dark btn-lg" role="button" style="margin:20px"> Create new course </a>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        {% for course in course_list %}
+            <div class="col-sm-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">{{course.title}} </h5>
+                        <p class="card-text">
+                            Teacher: {{course.teacher}} <br>
+                        </p>
+                        <a href="{%url 'update_course' course.pk%}" class="btn btn-secondary" role="button" style="margin:5px"> Update course </a>
+                        <a href="{%url 'delete_course' course.pk%}" class="btn btn-danger" role="button" style="margin:5px"> Delete course </a>
+                    </div>
+                </div>
+            </div>
+        {%endfor%}
+    </div>
+{%endblock%}
