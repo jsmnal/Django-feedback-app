@@ -20,7 +20,8 @@ def statistics(request):
     for message in queryset:
         labels.append(message["course__title"])
         data.append(message["course_rating"])
-    return render(request, "statistics.html", {"labels":labels, "data":data})
+    context = {"labels":labels, "data":data}
+    return render(request, "statistics.html", context)
 
 @login_required
 def feedback(request):
